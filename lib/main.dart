@@ -1,11 +1,12 @@
 import 'package:bookverse/core/utils/app_router.dart';
 import 'package:bookverse/features/home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'constants.dart';
 
-void main() async{
+void main() async {
   runApp(const Bookverse());
+  await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
   await Hive.openBox(kFeaturedBox);
 }
