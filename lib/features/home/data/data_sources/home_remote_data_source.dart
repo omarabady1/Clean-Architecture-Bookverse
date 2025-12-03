@@ -1,4 +1,6 @@
+import 'package:bookverse/constants.dart';
 import 'package:bookverse/core/utils/api_service.dart';
+import 'package:bookverse/core/utils/functions/cache_books.dart';
 import 'package:bookverse/features/home/data/models/book_model.dart';
 import 'package:bookverse/features/home/domain/entities/book_entity.dart';
 
@@ -15,6 +17,7 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks() async{
     var data = await apiService.get('volumes?q=subject:general');
     List<BookEntity> books = getBooksList(data);
+    cacheBoxData(books, kFeaturedBox);
     return books;
   }
 
