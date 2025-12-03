@@ -14,7 +14,7 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
   HomeRemoteDataSourceImp(this.apiService);
 
   @override
-  Future<List<BookEntity>> fetchFeaturedBooks() async{
+  Future<List<BookEntity>> fetchFeaturedBooks() async {
     var data = await apiService.get('volumes?q=subject:general');
     List<BookEntity> books = getBooksList(data);
     cacheBoxData(books, kFeaturedBox);
@@ -22,17 +22,19 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
   }
 
   @override
-  Future<List<BookEntity>> fetchNewestBooks() async{
-    var data = await apiService.get('volumes?q=subject:Computers&orderBy=newest');
+  Future<List<BookEntity>> fetchNewestBooks() async {
+    var data = await apiService.get(
+      'volumes?q=subject:Computers&orderBy=newest',
+    );
     List<BookEntity> books = getBooksList(data);
+    cacheBoxData(books, kNewestBox);
     return books;
   }
 
   List<BookEntity> getBooksList(Map<String, dynamic> data) {
     List<BookEntity> books = [];
     if (data['items'] != null && data['items'] is List) {
-      for(var item in data['items'])
-      {
+      for (var item in data['items']) {
         books.add(BookModel.fromJson(item));
       }
     }
