@@ -33,7 +33,7 @@ class Bookverse extends StatelessWidget {
           create: (context) {
             return FeaturedBooksCubit(
               FetchFeaturedBooksUseCase(locator.get<HomeRepoImpl>()),
-            );
+            )..fetchFeaturedBooks();
           },
         ),
         BlocProvider(

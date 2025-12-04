@@ -3,5 +3,5 @@ import 'package:hive/hive.dart';
 
 void cacheBoxData (List<BookEntity> books, String boxName)
 {
-  Hive.box(boxName).addAll(books);
+  Hive.box<BookEntity>(boxName).addAll(books);
 }

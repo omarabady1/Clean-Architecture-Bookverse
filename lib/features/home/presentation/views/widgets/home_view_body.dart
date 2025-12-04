@@ -1,8 +1,8 @@
 import 'package:bookverse/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'best_seller_sliver_list.dart';
-import 'books_listview.dart';
 import 'custom_app_bar.dart';
+import 'featured_books_list_view_bloc_builder.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -19,7 +19,7 @@ class HomeViewBody extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BooksListView(),
+                    FeaturedBooksListViewBlocBuilder(),
                     Divider(
                       indent: MediaQuery.of(context).size.width * 0.25,
                       endIndent: MediaQuery.of(context).size.width * 0.25,
