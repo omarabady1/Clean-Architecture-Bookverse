@@ -2,5 +2,5 @@ import 'package:bookverse/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class UseCase<T, Param>{
-  Future<Either<Failure, T>> call(Param param);
+  Future<Either<Failure, T>> call([Param param]);
 }
