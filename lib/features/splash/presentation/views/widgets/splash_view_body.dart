@@ -75,7 +75,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     slidingAnimationController.forward();
     slidingAnimationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Future.delayed(Duration(milliseconds: 200), () {
+        Future.delayed(Duration(milliseconds: 300), () {
           scaleAnimationController.forward();
         });
       }
