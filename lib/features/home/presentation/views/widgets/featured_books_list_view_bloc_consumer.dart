@@ -2,9 +2,9 @@ import 'package:bookverse/features/home/domain/entities/book_entity.dart';
 import 'package:bookverse/features/home/presentation/manager/featured_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/utils/custom_snack_bar.dart';
 import 'books_listview.dart';
+import 'featured_books_shimmer.dart';
 
 class FeaturedBooksListViewBlocConsumer extends StatefulWidget {
   const FeaturedBooksListViewBlocConsumer({super.key});
@@ -47,7 +47,7 @@ class _FeaturedBooksListViewBlocConsumerState
         } else if (state is FeaturedBooksFailure) {
           return Center(child: Text(state.errorMessage));
         } else {
-          return Center(child: CircularProgressIndicator());
+          return FeaturedBooksShimmer();
         }
       },
     );
