@@ -1,11 +1,13 @@
 import 'package:bookverse/core/utils/app_router.dart';
 import 'package:bookverse/core/utils/cached_network_image.dart';
 import 'package:bookverse/core/utils/styles.dart';
+import 'package:bookverse/features/home/domain/entities/book_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class VerticalListBookItem extends StatelessWidget {
-  const VerticalListBookItem({super.key});
+  const VerticalListBookItem(this.book, {super.key});
+  final BookEntity book;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +26,7 @@ class VerticalListBookItem extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
-                child: CustomNetworkImage(
-                  'https://books.google.com/books/content?id=etukl7GfrxQC&printsec=frontcover&img=1&zoom=2&source=gbs_api',
-                ),
+                child: CustomNetworkImage(book.thumbnailUrl),
               ),
               SizedBox(width: 34),
               Column(
@@ -36,20 +36,20 @@ class VerticalListBookItem extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
-                      'Harry Potter and the Goblet of Fire',
+                      book.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.sectra20,
                     ),
                   ),
-                  Text('J.K. Rowling', style: Styles.title12),
+                  Text(book.author, style: Styles.title12),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('19.99\$', style: Styles.sectra20),
-                        BookRating(),
+                        //Text('Pages: ${book.pageCount}', style: Styles.sectra20),
+                        //BookRating(),
                       ],
                     ),
                   ),

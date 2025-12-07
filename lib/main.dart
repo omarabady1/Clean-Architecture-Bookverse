@@ -40,7 +40,7 @@ class Bookverse extends StatelessWidget {
           create: (context) {
             return NewestBooksCubit(
               FetchNewestBooksUseCase(locator.get<HomeRepoImpl>()),
-            );
+            )..fetchNewestBooks();
           },
         ),
       ],

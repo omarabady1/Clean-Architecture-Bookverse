@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../home/presentation/views/widgets/vertical_listview_book_item.dart';
 import 'custom_search_text_field.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -29,7 +28,7 @@ class SearchResultList extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         padding: EdgeInsets.zero,
-        itemBuilder: (context, index) => VerticalListBookItem(),
+        itemBuilder: (context, index) => Container(), //VerticalListBookItem(),
         itemCount: 10,
       ),
     );

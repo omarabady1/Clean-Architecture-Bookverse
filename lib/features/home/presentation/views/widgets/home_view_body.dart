@@ -1,12 +1,47 @@
 import 'package:bookverse/core/utils/styles.dart';
+import 'package:bookverse/features/home/presentation/views/widgets/newest_books_sliver_list_bloc_consumer.dart';
 import 'package:flutter/material.dart';
-import 'best_seller_sliver_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../manager/newest_books_cubit.dart';
 import 'custom_app_bar.dart';
 import 'featured_books_list_view_bloc_consumer.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
 
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  late ScrollController _scrollController;
+  int nextPage = 1;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+  }
+  void _scrollListener() {
+    var currentPosition = _scrollController.position.pixels;
+    if (currentPosition >= 0.7 * _scrollController.position.maxScrollExtent) {
+      if (!isLoading) {
+        isLoading = true;
+        BlocProvider.of<NewestBooksCubit>(
+          context,
+        ).fetchNewestBooks(pageNumber: nextPage++);
+        isLoading = false;
+      }
+    }
+  }
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,6 +49,7 @@ class HomeViewBody extends StatelessWidget {
         const CustomAppBar(),
         Expanded(
           child: CustomScrollView(
+            controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
                 child: Column(
@@ -32,7 +68,7 @@ class HomeViewBody extends StatelessWidget {
                   ],
                 ),
               ),
-              BestSellerSliverList(),
+              NewestBooksSliverListBlocConsumer(),
             ],
           ),
         ),
