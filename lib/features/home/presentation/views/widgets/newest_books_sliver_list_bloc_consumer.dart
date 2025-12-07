@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/custom_snack_bar.dart';
+import 'custom_newest_books_item_shimmer.dart';
 
 class NewestBooksSliverListBlocConsumer extends StatefulWidget {
   const NewestBooksSliverListBlocConsumer({super.key});
@@ -47,7 +48,12 @@ class _NewestBooksSliverListBlocConsumerState
         } else if (state is NewestBooksFailure) {
           return Center(child: Text(state.errorMessage));
         } else {
-          return SliverFillRemaining(child: CircularProgressIndicator());
+          return  SliverList(
+            delegate: SliverChildBuilderDelegate(
+                  (context, index) => NewestBooksItemShimmer(),
+              childCount: 5,
+            ),
+          );
         }
       },
     );
