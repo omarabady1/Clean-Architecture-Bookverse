@@ -15,7 +15,9 @@ class VerticalListBookItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: InkWell(
         onTap: () {
-          GoRouter.of(context).push(AppRouter.kBookDetailsViewPath);
+          GoRouter.of(
+            context,
+          ).push(AppRouter.kBookDetailsViewPath, extra: book);
         },
         splashColor: Colors.white.withValues(alpha: 0.1),
         highlightColor: Colors.white.withValues(alpha: 0.05),
@@ -26,7 +28,9 @@ class VerticalListBookItem extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
-                child: CustomNetworkImage(book.thumbnailUrl),
+                child: CustomNetworkImage(
+                  book.thumbnailUrl,
+                ),
               ),
               SizedBox(width: 34),
               Column(
@@ -42,14 +46,31 @@ class VerticalListBookItem extends StatelessWidget {
                       style: Styles.sectra20,
                     ),
                   ),
-                  Text(book.author, style: Styles.title12),
+                  SizedBox(height: 8),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Text(
+                      book.author,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  SizedBox(height: 8),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        //Text('Pages: ${book.pageCount}', style: Styles.sectra20),
-                        //BookRating(),
+                        Text(
+                          book.previewUrl != '' ? 'Free Preview' : 'Not Available',
+                          style: Styles.title18,
+                        ),
+                        //BookRating(book),
+                        //The API doesn't have a book rating end point currently
+                        Text(
+                          '${book.pageCount} pages',
+                          style: Styles.title12,
+                        ),
                       ],
                     ),
                   ),

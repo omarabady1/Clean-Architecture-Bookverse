@@ -63,7 +63,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 24.0),
-                      child: const Text('Best Seller', style: Styles.title18),
+                      child: const Text('Newest Books', style: Styles.title18),
                     ),
                   ],
                 ),
